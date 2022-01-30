@@ -1,11 +1,13 @@
-#ifndef __Option_Model__
-#define __Option_Model__
+#ifndef __Models__
+#define __Models__
 
 #include <iostream>
 #include <string>
+#include <map>
 
 using namespace std;
 
+//==============================================================================//
 
 class OptionModel{
 public:
@@ -15,17 +17,20 @@ private:
 
 };
 
-#endif
+
 
 //==============================================================================//
 
-#ifndef __Model__
-#define __Model__
-
-struct Model{
-    OptionModel openerModel("opener");
-
+class Model {
+public:
+    Model();
+    ~Model();
+    
+    OptionModel openerOption();
+private:
+    OptionModel *openerOptionPtr;
 };
 
+//==============================================================================//
 
 #endif

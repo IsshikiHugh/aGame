@@ -11,7 +11,6 @@ using namespace std;
 #include "./utils/printController.h"
 #include "./utils/models.h"
 
-extern Game g;
 extern Model model;
 
 class Game {
@@ -27,9 +26,9 @@ public:
     void showTitle();
 
     // Print usable options according to optionModel m    
-    void showOption(const OptionModel &m);
+    void showOption(const OptionModel m);
     // Deal options according to optionModel m    
-    bool dealOption(const OptionModel &m);
+    bool dealOption(const OptionModel m);
 private:
     string gameVersion;
 };

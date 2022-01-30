@@ -1,6 +1,7 @@
 #include "game.h"
 
 Game::Game(){
+    // TODO: read config file
 
 }
 
@@ -33,11 +34,11 @@ void Game::showTitle(){
     return;
 }
 
-void Game::showOption(const OptionModel &m){
+void Game::showOption(OptionModel m){
 
 } 
 
-bool Game::dealOption(const OptionModel &m){
+bool Game::dealOption(OptionModel m){
     bool ret = false;
 
 
@@ -48,8 +49,8 @@ void Game::gameOpener(){
 
     showTitle();
     while(true){
-        showOption(model.openerOption);
-        if( dealOption(model.openerOption) ) break;
+        showOption( model.openerOption() );
+        if( dealOption( model.openerOption() ) ) break;
     }
 
 }

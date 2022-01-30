@@ -1,4 +1,5 @@
 #include "game.h"
+#include "./utils/models.h"
 
 Game g;
 Model model;
