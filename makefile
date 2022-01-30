@@ -24,4 +24,5 @@ clean :
 	run.exe \
 	./src/main.o \
 	./src/game.o \
-	./src/utils/printController.o
+	./src/utils/printController.o \
+	./src/utils/models.o
