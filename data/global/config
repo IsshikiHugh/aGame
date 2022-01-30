@@ -1,0 +1,5 @@
+# Use 'key : val , val ;' to write the file. #
+# A '`' is seen as a space character. #
+
+game_version : 0.1 ;
+author : Isshiki`Hugh , Silver`Moon ;

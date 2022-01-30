@@ -1,8 +1,9 @@
 #include "game.h"
 
+Game g;
+Model model;
+
 int main(){
-    Game::gameOpener();
-
-
+    g.gameOpener();
     return 0;
 }
