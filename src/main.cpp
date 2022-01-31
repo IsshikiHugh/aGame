@@ -9,7 +9,7 @@ Model model;
 
 
 int main(){
-    dealReader(r.init("./data/index.qwq"));
+    r.init("./data/index.qwq");
     g.gameOpener();
     return 0;
 }

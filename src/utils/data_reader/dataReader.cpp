@@ -15,7 +15,7 @@ int QWQAnalyzer::analyze(){
     if(!data.is_open()){
         ret = -1;
         data.close();
-        return;
+        return ret;
     }
 
     cout << "open\n";
@@ -181,7 +181,9 @@ void QWQReader::dealReader(int code){
 }
 
 int QWQReader::init(string path){
+    int ret = 1;
     QWQAnalyzer indexAnalyzer(path);
     dealReader( indexAnalyzer.analyze() );
     // TODO: find a way to init() each dic.
+    return ret;
 }

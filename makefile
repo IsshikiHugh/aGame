@@ -1,4 +1,4 @@
-run.exe : ./src/main.o ./src/game.o ./src/utils/printController.o ./src/utils/models.o
+run.exe : ./src/main.o ./src/game.o ./src/utils/printController.o ./src/utils/models.o dataReader.o
 	g++ -o run.exe \
 	./src/main.o \
 	./src/game.o \
@@ -6,7 +6,7 @@ run.exe : ./src/main.o ./src/game.o ./src/utils/printController.o ./src/utils/mo
 	./src/utils/models.o \
 	./src/utils/data_reader/dataReader.o
 
-main.o : ./src/main.cpp ./src/game.h ./src/utils/models.h ./utils/data_reader/dataReader.h
+main.o : ./src/main.cpp ./src/game.h ./src/utils/models.h ./src/utils/data_reader/dataReader.h
 	g++ \
 	-c ./src/main.cpp \
 	-o ./src/main.o
@@ -19,14 +19,14 @@ printController.o : ./src/utils/printController.cpp ./src/utils/printController.
 	g++ \
 	-o ./src/utils/printController.o \
 	-c ./src/utils/printController.cpp 
-dataReader.o : ./utils/data_reader/dataReader.cpp ./utils/data_reader/dataReader.h
-	g++ \
-	-o ./src/utils/data_reader/dataReader.o \
-	-c ./src/utils/data_reader/dataReader.cpp
 models.o : ./src/utils/models.cpp ./src/utils/models.h
 	g++ \
 	-o ./src/utils/models.o \
-	-c ./src/utils/models.cpp
+	-c ./src/utils/models.cpp 
+dataReader.o : ./src/utils/data_reader/dataReader.cpp ./src/utils/data_reader/dataReader.h
+	g++ \
+	-o ./src/utils/data_reader/dataReader.o \
+	-c ./src/utils/data_reader/dataReader.cpp
 
 clean : 
 	rm \
@@ -34,4 +34,5 @@ clean :
 	./src/main.o \
 	./src/game.o \
 	./src/utils/printController.o \
-	./src/utils/models.o
+	./src/utils/models.o \
+	./src/utils/data_reader/dataReader.o
