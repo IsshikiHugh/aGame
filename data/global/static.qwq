@@ -1,0 +1,9 @@
+# Use 'key : val , val ;' to write the file. #
+# A '`' is seen as a space character. #
+
+# Basic informations of the project. #
+Base {
+    game_version : 0.1 ;
+    author : Isshiki`Hugh , Silver`Moon ;
+    github : https://github.com/IsshikiHugh/aGame ;
+}

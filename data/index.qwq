@@ -1,0 +1,4 @@
+# File to index the path of each data file. #
+path {
+    static : ./data/glocal/static.qwq ;
+}
