@@ -7,6 +7,15 @@ Game::Game(){
 
 Game::~Game(){}
 
+void Game::init(QWQReader r){
+    auto t = ( ( r.getStaticData() ).getTag("Base") );
+    this->gameVersion = t["game_version"].front();
+    this->authors = t["author"];
+    this->lastUpdateTime = t["update_time"].front();
+    this->githubLink = t["github"].front();
+    this->discription = t["discription"];
+}
+
 void Game::showTitle(){
     vector<string> msg{
         "##================================================================##",
@@ -27,9 +36,27 @@ void Game::showTitle(){
         " 〔Ẕ〕 写它可能只是因为......这很有趣？ (乐)",
         ""
     };
-    string versionMsg("  #  Version : ");
-    versionMsg.append(this->gameVersion);
-    msg.push_back(versionMsg);
+    
+    // TODO: Make things below more tiddy.
+    string moreMsg("  #  Version : ");
+    moreMsg.append(this->gameVersion);
+    msg.push_back(moreMsg);
+    
+    moreMsg = "  #  Last Update : ";
+    moreMsg.append(this->lastUpdateTime);
+    msg.push_back(moreMsg);
+
+
+    // TODO: move it into option.
+    moreMsg = "  #  Authors : ";
+    for(auto it = this->authors.begin();it != this->authors.end();++it){
+        if(it != this->authors.begin()){
+            moreMsg = "               ";
+        }
+        moreMsg.append(*it);
+        msg.push_back(moreMsg);
+    }
+
     printAll(msg);
     return;
 }

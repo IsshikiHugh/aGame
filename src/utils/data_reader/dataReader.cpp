@@ -11,15 +11,13 @@ int QWQAnalyzer::analyze(){
     int ret = 1; // nothing wrong
     ifstream data;
     data.open(this->path,ios::in);
-
     if(!data.is_open()){
         ret = -1;
         data.close();
         return ret;
     }
-
-    cout << "open\n";
-
+    // cerr << "analyzing~\n";
+    // TODO: Change it to status code.
     string str , tag , key;
     bool isIgnore = false;
 
@@ -180,10 +178,55 @@ void QWQReader::dealReader(int code){
     }
 }
 
-int QWQReader::init(string path){
+// ====================================================================
+// QWQRecorder
+
+void QWQRecorder::init(map < string , map < string , vector<string> > > &dic){
+    this->dic = dic;
+}
+
+map< string , vector<string> > &QWQRecorder::getTag(string tag){
+    return dic[tag];
+}
+vector<string> &QWQRecorder::getVal(string tag , string key){
+    return dic[tag][key];
+}
+
+// ====================================================================
+
+
+int QWQReader::init(string path){ // Don't change it to reference.
     int ret = 1;
     QWQAnalyzer indexAnalyzer(path);
     dealReader( indexAnalyzer.analyze() );
+    auto &mv = indexAnalyzer.getTag("Path");
+
+    path = mv["static"].front();
+    cout << path << "\n";
+    QWQAnalyzer staticDataAnalyzer(path);
+    staticDataAnalyzer.analyze();
+    auto vv = staticDataAnalyzer.dic;
+    staticData.init(staticDataAnalyzer.dic);
+
     // TODO: find a way to init() each dic.
     return ret;
+}
+
+QWQRecorder &QWQReader::getStaticData(){
+    return this->staticData;
+}
+QWQRecorder &QWQReader::getArchiveData(){
+    return this->archiveData;
+}
+QWQRecorder &QWQReader::getItemDictionary(){
+    return this->itemDictionary;
+}
+QWQRecorder &QWQReader::getMonsterDictionary(){
+    return this->monsterDictionary;
+}
+QWQRecorder &QWQReader::getNpcDictionary(){
+    return this->npcDictionary;
+}
+QWQRecorder &QWQReader::getRoomDictionary(){
+    return this->roomDictionary;
 }

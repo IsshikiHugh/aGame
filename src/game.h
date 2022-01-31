@@ -10,8 +10,10 @@ using namespace std;
 
 #include "./utils/printController.h"
 #include "./utils/models.h"
+#include "./utils/data_reader/dataReader.h"
 
 extern Model model;
+// extern QWQReader r;
 
 class Game {
 public:
@@ -20,9 +22,13 @@ public:
     // D'tor
     ~Game();
     
+    // Be used to initialized Game object with reader r.
+    void init(QWQReader r);
+
     // Be used to deal the begin of the game.
     void gameOpener();
 
+    // Be used to show title scenes.
     void showTitle();
 
     // Print usable options according to optionModel m    
@@ -30,7 +36,11 @@ public:
     // Deal options according to optionModel m    
     bool dealOption(const OptionModel m);
 private:
-    string gameVersion;
+    string gameVersion{"0.1"};
+    vector<string> authors;
+    string lastUpdateTime{"2077.1.1"};
+    string githubLink{"404 NOT FOUND"};
+    vector<string> discription;
 };
 
 

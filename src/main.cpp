@@ -10,6 +10,7 @@ Model model;
 
 int main(){
     r.init("./data/index.qwq");
+    g.init(r);
     g.gameOpener();
     return 0;
 }

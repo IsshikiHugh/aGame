@@ -11,7 +11,7 @@ main.o : ./src/main.cpp ./src/game.h ./src/utils/models.h ./src/utils/data_reade
 	-c ./src/main.cpp \
 	-o ./src/main.o
 
-game.o : ./src/game.cpp ./src/game.h ./src/utils/printController.h ./src/utils/models.h
+game.o : ./src/game.cpp ./src/game.h ./src/utils/printController.h ./src/utils/models.h ./utils/data_reader/dataReader.h
 	g++ \
 	-o ./src/game.o \
 	-c ./src/game.cpp

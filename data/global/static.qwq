@@ -1,9 +1,8 @@
-# Use 'key : val , val ;' to write the file. #
-# A '`' is seen as a space character. #
-
 # Basic informations of the project. #
 Base {
     game_version : 0.1 ;
-    author : Isshiki`Hugh , Silver`Moon ;
+    author : Isshiki Hugh , Silver Moon ;
+    update_time : 2022.1.31 ;
     github : https://github.com/IsshikiHugh/aGame ;
+    discription : 这是一个一时兴起而开发出来的游戏 ;
 }

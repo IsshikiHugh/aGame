@@ -11,11 +11,14 @@
 using namespace std;
 
 // Base class for other recorder.
-class QWQRecorder {
-public:
-    QWQRecorder(){};
-    virtual ~QWQRecorder(){};
-protected:
+struct QWQRecorder {
+    QWQRecorder(){}
+    virtual ~QWQRecorder(){}
+
+    map < string , vector<string> > &getTag(string tag);
+    vector<string> &getVal(string tag , string key);
+
+    void init(map < string , map < string , vector<string> > > &dic);
     string typeName;
     // [tag][key][v:val]
     map < string , map < string , vector<string> > > dic;
@@ -50,12 +53,21 @@ public:
 
     // Be used to deal Error Code.
     void dealReader(int code);
+
+    QWQRecorder &getStaticData();
+    QWQRecorder &getArchiveData();
+    QWQRecorder &getItemDictionary();
+    QWQRecorder &getMonsterDictionary();
+    QWQRecorder &getNpcDictionary();
+    QWQRecorder &getRoomDictionary();
+
+    
 private:
     QWQRecorder staticData;                 // Basic information of game.
     QWQRecorder archiveData;                // Data of player.
     QWQRecorder itemDictionary;             // Dictionary of items.
-    QWQRecorder monsterDictionary;        // Dictionary of monster.
-    QWQRecorder npcDictionary;            // Dictionary of npc.
+    QWQRecorder monsterDictionary;          // Dictionary of monster.
+    QWQRecorder npcDictionary;              // Dictionary of npc.
     QWQRecorder roomDictionary;             // Dictionary of room.
 };
 
