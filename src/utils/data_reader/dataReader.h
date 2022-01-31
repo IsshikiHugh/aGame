@@ -15,7 +15,7 @@ class QWQRecorder {
 public:
     QWQRecorder(){};
     virtual ~QWQRecorder(){};
-// protected:
+protected:
     string typeName;
     // [tag][key][v:val]
     map < string , map < string , vector<string> > > dic;
@@ -29,16 +29,27 @@ public:
     virtual ~QWQAnalyzer(){}
 
     // Return 1 while nothing wrong.
-    // Return 0 while there is something wrong with file. 
+    // Return 0 while there is something wrong with file.
+    // Return -1 while file doesn't exist. 
     int analyze();
-// private:
+private:
     string path;
 };
 
 // Be used to manage the data read in.
 class QWQReader {
 public:
+    QWQReader(){};
+    ~QWQReader(){};
 
+    // Initialize reader with index file in the path.
+    // Return 1 while nothing wrong.
+    // Return 0 while there is something wrong with file.
+    // Return -1 while file doesn't exist.  
+    int init(string path);
+
+    // Be used to deal Error Code.
+    void dealReader(int code);
 private:
     QWQRecorder staticData;                 // Basic information of game.
     QWQRecorder archiveData;                // Data of player.
@@ -46,6 +57,6 @@ private:
     QWQRecorder monsterDictionary;        // Dictionary of monster.
     QWQRecorder npcDictionary;            // Dictionary of npc.
     QWQRecorder roomDictionary;             // Dictionary of room.
-}r;
+};
 
 #endif

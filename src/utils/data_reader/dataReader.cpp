@@ -11,6 +11,13 @@ int QWQAnalyzer::analyze(){
     int ret = 1; // nothing wrong
     ifstream data;
     data.open(this->path,ios::in);
+
+    if(!data.is_open()){
+        ret = -1;
+        data.close();
+        return;
+    }
+
     cout << "open\n";
 
     string str , tag , key;
@@ -154,3 +161,27 @@ int QWQAnalyzer::analyze(){
 }
 
 // ====================================================================
+// QWQReader
+
+void QWQReader::dealReader(int code){
+    switch (code) {
+    case 1:
+        return;
+    case 0:
+        cerr << "[Fail] Reader initialize failed.\n";
+        cerr << "[Fail] There is something wrong with the index.qwq.\n";
+        exit(0);
+        break;
+    case -1:
+        cerr << "[Fail] Reader initialize failed.\n";
+        cerr << "[Fail] can't find index.qwq.\n";
+        exit(0);
+        break;
+    }
+}
+
+int QWQReader::init(string path){
+    QWQAnalyzer indexAnalyzer(path);
+    dealReader( indexAnalyzer.analyze() );
+    // TODO: find a way to init() each dic.
+}
