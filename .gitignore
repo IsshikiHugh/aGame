@@ -33,3 +33,6 @@
 
 # VSC files
 *.vscode
+
+# Log files
+*.log

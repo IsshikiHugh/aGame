@@ -58,6 +58,14 @@ void Game::showTitle(){
     }
 
     printAll(msg);
+
+    //logger example
+    log.trace("trace");
+    log.debug("debug");
+    log.warn("warn");
+    log.info("info");
+    log.error("error");
+    log.fatal("fatal");
     return;
 }
 

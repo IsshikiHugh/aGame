@@ -10,9 +10,12 @@ using namespace std;
 
 #include "./utils/printController.h"
 #include "./utils/models.h"
+#include "./utils/logger.h"
 #include "./utils/data_reader/dataReader.h"
+
 using namespace printController;
 
+extern Logger log;
 extern Model model;
 // extern QWQReader r;
 
