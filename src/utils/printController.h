@@ -9,7 +9,17 @@ using namespace std;
 
 ostream &tab(ostream &ostr);
 
-// Be used to print everything in str[] with a `std::endl` between each string.
-void printAll(vector<string> str);
+namespace printController{
+
+    // Be used to print everything in str[] with a `std::endl` between each string.
+    void printAll(vector<string> &str);
+
+    // Be used to put all messages into a frame.
+    vector<string> generateIntoFrame(vector<string> &str);
+
+
+};
+
+
 
 #endif

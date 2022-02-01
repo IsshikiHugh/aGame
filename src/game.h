@@ -11,6 +11,7 @@ using namespace std;
 #include "./utils/printController.h"
 #include "./utils/models.h"
 #include "./utils/data_reader/dataReader.h"
+using namespace printController;
 
 extern Model model;
 // extern QWQReader r;

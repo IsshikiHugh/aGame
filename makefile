@@ -1,4 +1,4 @@
-run.exe : ./src/main.o ./src/game.o ./src/utils/printController.o ./src/utils/models.o dataReader.o
+run.exe : ./src/main.o ./src/game.o ./src/utils/printController.o ./src/utils/models.o ./src/utils/data_reader/dataReader.o
 	g++ -o run.exe \
 	./src/main.o \
 	./src/game.o \
@@ -8,8 +8,8 @@ run.exe : ./src/main.o ./src/game.o ./src/utils/printController.o ./src/utils/mo
 
 main.o : ./src/main.cpp ./src/game.h ./src/utils/models.h ./src/utils/data_reader/dataReader.h
 	g++ \
-	-c ./src/main.cpp \
-	-o ./src/main.o
+	-o ./src/main.o \
+	-c ./src/main.cpp 
 
 game.o : ./src/game.cpp ./src/game.h ./src/utils/printController.h ./src/utils/models.h ./utils/data_reader/dataReader.h
 	g++ \

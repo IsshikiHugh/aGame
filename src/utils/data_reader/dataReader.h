@@ -63,6 +63,7 @@ public:
 
     
 private:
+    // TODO: Make it more "OOP\n".
     QWQRecorder staticData;                 // Basic information of game.
     QWQRecorder archiveData;                // Data of player.
     QWQRecorder itemDictionary;             // Dictionary of items.

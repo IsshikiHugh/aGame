@@ -7,7 +7,6 @@ Game g;
 Model model;
 
 
-
 int main(){
     r.init("./data/index.qwq");
     g.init(r);
