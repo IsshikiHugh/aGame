@@ -5,7 +5,7 @@
 
 QWQReader r;
 Game g;
-Logger log;
+Logger log{};
 Model model;
 
 int main(){

@@ -15,9 +15,8 @@ using namespace std;
 
 using namespace printController;
 
-extern Logger log;
+// extern Logger log;
 extern Model model;
-// extern QWQReader r;
 
 class Game {
 public:
