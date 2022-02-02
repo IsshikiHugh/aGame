@@ -37,8 +37,8 @@ void printController::lineCut(string &str, vector<string> &slices, int len){
 
     // It only try to push_back while you fail to add more character. 
     for(auto it = str.begin();it < str.end();){
-        int step = ( (int)(*it) < 0 ) ? zhChWidth : enChWidth ;
-        int width = ( (int)(*it) < 0 ) ? 2 : 1 ;
+        int step = ( (int)(*it) < 0 || (int)(*it) >= 128 ) ? zhChWidth : enChWidth ;
+        int width = ( (int)(*it) < 0 || (int)(*it) >= 128 ) ? 2 : 1 ;
         cntLen += width;
         if(cntLen > len){
             slices.push_back( str.substr(lp,rp-lp) );
