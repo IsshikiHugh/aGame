@@ -15,7 +15,7 @@ using namespace std;
 
 using namespace printController;
 
-extern Logger log;
+extern Logger logs;
 extern Model model;
 
 class Game {

@@ -51,7 +51,7 @@ private:
     //4 : Warn
     //5 : Error
     //6 : Fatal
-    void printWithColor(int type,string prefix,string msg);
+    void printWithColor(int type,string msg);
     
     //Write the message to the log file.
     void writetoLog(string msg);

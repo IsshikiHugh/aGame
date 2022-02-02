@@ -6,15 +6,15 @@
 
 QWQReader r;
 Game g;
-Logger log{};
+Logger logs;
 Model model;
 
 int main(){
     printController::zhInit();
-    log.init();
+    logs.init();
     r.init("./data/index.qwq");
     g.init(r);
     g.gameOpener();
-    log.close();
+    logs.close();
     return 0;
 }
