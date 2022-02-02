@@ -1,9 +1,18 @@
 #include "printController.h"
 
-string baseZhCh{"中"};
-string baseEnCh{"E"};
-const int zhChWidth = baseZhCh.size();
-const int enChWidth = baseEnCh.size();
+int getLocalZhChWidth(){
+    ifstream infile;
+    infile.open("./printContollerCorrectFile",ios::in);
+    int size;
+    string str;
+    infile >> size >> str;
+    return str.size() / size;
+}
+
+int localZhChWidth = getLocalZhChWidth();
+int localEnChWidth = 1;
+const int &zhChWidth = localZhChWidth;
+const int &enChWidth = localEnChWidth;
 
 
 ostream &printController::tab(ostream &ostr){
@@ -42,7 +51,7 @@ void printController::lineCut(string &str, vector<string> &slices, int len){
         cntLen += width;
         if(cntLen > len){
             slices.push_back( str.substr(lp,rp-lp) );
-            cout << "slices : " << str.substr(lp,rp-lp) << "\n";
+            // cout << "slices : " << str.substr(lp,rp-lp) << "\n";
             lp = rp;
             cntLen = width;
         }
@@ -50,7 +59,7 @@ void printController::lineCut(string &str, vector<string> &slices, int len){
         it += step;
     }
     slices.push_back( str.substr(lp,rp-lp) );
-    cout << "slices : " << str.substr(lp,rp-lp) << "\n";
+    // cout << "slices : " << str.substr(lp,rp-lp) << "\n";
 }
 
 vector<string> printController::generateIntoFrame(vector<string> &str){
