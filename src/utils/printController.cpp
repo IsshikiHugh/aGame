@@ -1,18 +1,34 @@
 #include "printController.h"
 
+
+int zhChWidth;
+int enChWidth = 1;
+
 int getLocalZhChWidth(){
-    ifstream infile;
-    infile.open("./printContollerCorrectFile",ios::in);
     int size;
     string str;
-    infile >> size >> str;
-    return str.size() / size;
+    cout << "[正在校准] 请输入一个任意中文汉字：\n";
+    cin >> str;
+    size = str.size();
+    cout << "[正在校准] 请再输入两个任意中文汉字:\n";
+    cin >> str;
+    if(size != str.length()/2) return -1;
+    return size;
 }
 
-int localZhChWidth = getLocalZhChWidth();
-int localEnChWidth = 1;
-const int &zhChWidth = localZhChWidth;
-const int &enChWidth = localEnChWidth;
+void printController::zhInit(){
+    while(true){
+        int resp = getLocalZhChWidth();
+        if(resp == -1){
+            cout << "校准失败！请重新校准！\n";
+        } else {
+            cout << "校准成功！[" << resp << "]\n";
+            zhChWidth = resp;
+            return;
+        }
+    }
+}
+
 
 
 ostream &printController::tab(ostream &ostr){

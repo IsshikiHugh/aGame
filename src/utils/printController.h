@@ -12,7 +12,9 @@ using namespace std;
 namespace printController{
 
     ostream &tab(ostream &ostr);
-    
+
+    // Be used to get the size of zh word.
+    void zhInit();    
 
     // Be used to print everything in str[] with a `std::endl` between each string.
     void printAll(vector<string> &str);

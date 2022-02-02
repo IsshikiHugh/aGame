@@ -7,7 +7,7 @@ run.exe : ./src/main.o ./src/game.o ./src/utils/printController.o ./src/utils/mo
 	./src/utils/logger/logger.o \
 	./src/utils/data_reader/dataReader.o
 
-main.o : ./src/main.cpp ./src/game.h ./src/utils/models.h /src/utils/logger/logger.h ./src/utils/data_reader/dataReader.h
+main.o : ./src/main.cpp ./src/game.h ./src/utils/models.h /src/utils/logger/logger.h ./src/utils/data_reader/dataReader.h ./src/utils/printController.h
 	g++ \
 	-o ./src/main.o \
 	-c ./src/main.cpp 

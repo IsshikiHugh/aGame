@@ -7,6 +7,7 @@ using namespace printController;
 int main(){
     vector<string> kkk,ttt;
     string str;
+    zhInit();
     while(1){
         cin >> str;
         if(str == "#") break;
