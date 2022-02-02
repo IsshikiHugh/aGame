@@ -10,7 +10,7 @@ Logger log{};
 Model model;
 
 int main(){
-    printController::zhInit();
+    // printController::zhInit(); // Not necessarrily.
     log.init();
     r.init("./data/index.qwq");
     g.init(r);

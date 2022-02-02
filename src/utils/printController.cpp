@@ -1,9 +1,10 @@
 #include "printController.h"
 
-
-int zhChWidth;
+string baseZhChar{"中"};
+int zhChWidth = baseZhChar.length();
 int enChWidth = 1;
 
+// useless
 int getLocalZhChWidth(){
     int size;
     string str;
@@ -16,6 +17,7 @@ int getLocalZhChWidth(){
     return size;
 }
 
+// useless
 void printController::zhInit(){
     while(true){
         int resp = getLocalZhChWidth();
