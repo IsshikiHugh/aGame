@@ -42,6 +42,7 @@ void printController::lineCut(string &str, vector<string> &slices, int len){
         cntLen += width;
         if(cntLen > len){
             slices.push_back( str.substr(lp,rp-lp) );
+            cout << "slices : " << str.substr(lp,rp-lp) << "\n";
             lp = rp;
             cntLen = width;
         }
@@ -49,6 +50,7 @@ void printController::lineCut(string &str, vector<string> &slices, int len){
         it += step;
     }
     slices.push_back( str.substr(lp,rp-lp) );
+    cout << "slices : " << str.substr(lp,rp-lp) << "\n";
 }
 
 vector<string> printController::generateIntoFrame(vector<string> &str){
