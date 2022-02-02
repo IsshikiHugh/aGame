@@ -1,20 +1,17 @@
 #ifndef __Logger__
 #define __Logger__
 
-#define  FOREGROUND_WHITE      0x0007 
-#define  FOREGROUND_YELLOW     0x0006
-#define  FOREGROUND_PINK       0x0005
-#define  FOREGROUND_INDIGO     0x0003
-
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <windows.h>
+#include <ctime>
 
 using namespace std;
 
 class Logger{
 public:
+    Logger(){};
+    ~Logger(){};
     //Initialize logger with the default log file name("latest.log").
     int init();
 
@@ -41,8 +38,11 @@ public:
     void close();
 
 private:
-    HANDLE hout;
     ofstream log;
+
+    //Return a string in the format of "YYYY-MM-hour-min-sec"
+    string getTimeStr();
+
     //Print a message with the format of the type.
     //Type:
     //1 : Trace

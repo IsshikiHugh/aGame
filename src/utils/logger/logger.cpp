@@ -3,17 +3,30 @@
 using namespace std;
 
 int Logger::init(){
-    return init("latest.log");
+    return init(getTimeStr()+".log");
 }
 
 int Logger::init(string filename){
-    this->hout = GetStdHandle(STD_OUTPUT_HANDLE);
-    this->log.open(filename,ios::out | ios::trunc);
+    this->log.open("./logs/"+filename,ios::out);
     if(!this->log.is_open()){
-        printWithColor(5,"[ERROR]","Error when opening the log file.");
+        printWithColor(5,"[ERROR]","Error when opening the log file. Please check if the ./logs dir has been created.");
         return -1;
     }
     return 0;
+}
+
+string Logger::getTimeStr(){
+    string res="";
+    time_t now=time(0);
+    tm *ltm=localtime(&now);
+    cout<<"year:"<<ltm->tm_year;
+    res.append(to_string(1900 + ltm->tm_year)+"-")
+        .append(to_string(1 + ltm->tm_mon)+"-")
+        .append(to_string(ltm->tm_mday)+"_")
+        .append(to_string(ltm->tm_hour)+"-")
+        .append(to_string(ltm->tm_min)+"-")
+        .append(to_string(ltm->tm_sec));
+    return res;
 }
 
 void Logger::trace(string msg){
@@ -38,7 +51,7 @@ void Logger::info(string msg){
 } 
 
 void Logger::warn(string msg){
-    string str="[WARNING]";
+    string str="[WARN]";
     printWithColor(4,str,msg);
     str.append(msg);
     writetoLog(str);
@@ -65,24 +78,43 @@ void Logger::fatal(string msg,int code){
 }
 
 void Logger::printWithColor(int type,string prefix,string msg){
+    /*
+        F       B
+        30      40      黑色
+        31      41      红色
+        32      42      绿色
+        33      43      黄色
+        34      44      蓝色
+        35      45      紫色
+        36      46      青蓝色
+        37      47      白色
+        几种特殊'颜色'：
+        0     OFF
+        1     高亮显示
+        4     underline
+        5     闪烁
+        7     反显
+        8     消隐（不可见）
+    */
+    string s1;
     switch(type){
         case 1://Trace
-            SetConsoleTextAttribute(this->hout,FOREGROUND_WHITE);break;
+            s1="\e[37;1m";break;
         case 2://Debug
-            SetConsoleTextAttribute(this->hout,FOREGROUND_PINK | FOREGROUND_INTENSITY);break;
+            s1="\e[35;40m";break;
         case 3://Info
-            SetConsoleTextAttribute(this->hout,FOREGROUND_INDIGO | FOREGROUND_INTENSITY);break;
+            s1="\e[36;40m";break;
         case 4://Warn
-            SetConsoleTextAttribute(this->hout,FOREGROUND_YELLOW | FOREGROUND_INTENSITY);break;
+            s1="\e[33;40m";break;
         case 5://Error
-            SetConsoleTextAttribute(this->hout,FOREGROUND_RED | FOREGROUND_INTENSITY);break;
+            s1="\e[31;40m";break;
         case 6://Fatal
-            SetConsoleTextAttribute(this->hout,FOREGROUND_WHITE | BACKGROUND_RED | FOREGROUND_INTENSITY);break;
+            s1="\e[37;41m";break;
         default:
             break;
     }
-    cout<<prefix;
-    SetConsoleTextAttribute(this->hout,FOREGROUND_WHITE | FOREGROUND_INTENSITY);
+    s1.append(prefix).append("\e[0m");
+    cout<<s1;
     cout<<" "<<msg<<endl; 
 }
 
