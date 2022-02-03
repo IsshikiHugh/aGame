@@ -9,7 +9,7 @@ Game::~Game(){}
 
 void Game::init(QWQReader r){
     auto t = ( ( r.getRecorder("static") ).getTag("Base") );
-    this->lang = t["languate"].front();
+    this->lang = t["language"].front();
     this->gameVersion = t["game_version"].front();
     this->authors = t["author"];
     this->lastUpdateTime = t["update_time"].front();
@@ -62,6 +62,7 @@ void Game::showTitle(){
         ""
     };
     
+    /*
     // TODO: Make things below more tiddy.
     string moreMsg("  #  Version : ");
     moreMsg.append(this->gameVersion);
@@ -80,17 +81,9 @@ void Game::showTitle(){
         }
         moreMsg.append(*it);
         msg.push_back(moreMsg);
-    }
+    }*/
 
     printAll(msg);
-
-    //logger example
-    logs.trace("trace");
-    logs.debug("debug");
-    logs.warn("warn");
-    logs.info("info");
-    logs.error("error");
-    logs.fatal("fatal");
     return;
 }
 
@@ -117,7 +110,9 @@ void Game::showOption(const string &target){
 
 bool Game::dealOption(const string &target){
     bool ret = false;
-
+    string str;
+    cin >> str;
+    // remember to deal the 
 
     return ret;
 }
@@ -127,7 +122,7 @@ void Game::gameOpener(){
     showTitle();
     while(true){
         showOption( "initial_menu" );
-        // if( dealOption( "initial_menu" ) ) break;
+        if( dealOption( "initial_menu" ) ) break;
     }
 
 }

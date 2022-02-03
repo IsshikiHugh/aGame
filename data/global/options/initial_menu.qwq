@@ -8,7 +8,7 @@ o_model {
     des_zh : write Chinese description here ;
     des_en : write English description here ;
     button : write word to use the option here ;
-    leve : write the priority level here(which decide the color of the option) ;
+    level : write the priority level here(which decide the color of the option) ;
 
     target_type : state the type of the option here(which decide the function of the option) ;
     target : write the path of the target here ;
@@ -36,7 +36,7 @@ o_1 {
 # Load #
 o_2 {
     des_zh : 载入存档 ;
-    des_en : Load Save;
+    des_en : Load Save ;
     button : load ;
     level : 1 ;
 

@@ -3,10 +3,23 @@
 
 //==============================================================================//
 
+// ====================================================================
+// optionRecorder
+
+void optionRecorder::init(map < string , map < string , vector<string> > > &dic){
+    this->dic = dic;
+}
+
+map< string , vector<string> > &optionRecorder::getTag(string tag){
+    return dic[tag];
+}
+vector<string> &optionRecorder::getVal(string tag , string key){
+    return dic[tag][key];
+}
 
 
 //==============================================================================//
-void optionsModel::set(QWQRecorder aimRecorder){
+void optionsModel::set(optionRecorder aimRecorder){
     logs.info("start set optionModel");
     vector<string> &use = aimRecorder.getVal("o_0","use");
     for(auto useIt = use.begin();useIt != use.end();++useIt){
@@ -26,7 +39,6 @@ void optionsModel::set(QWQRecorder aimRecorder){
 const vector< optionModel > &optionsModel::getOptions(){
     return options;
 }
-
 
 
 

@@ -1,8 +1,7 @@
-#include "game.h"
-#include "./utils/models.h"
-#include "./utils/data_reader/dataReader.h"
+#include "./game.h"
 #include "./utils/logger/logger.h"
 #include "./utils/printController.h"
+#include "./utils/data_reader/dataReader.h"
 
 QWQReader r;
 Game g;

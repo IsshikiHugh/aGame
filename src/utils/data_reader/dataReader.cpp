@@ -64,6 +64,7 @@ int QWQAnalyzer::analyze(){
         } else if(str == "}"){
             if(isInTag){
                 isInTag = false;
+                afterTag = false;
                 continue;
             } else {
                 ret = 0;
@@ -135,7 +136,7 @@ int QWQAnalyzer::analyze(){
 
         if(newVal){
             newVal = false;
-            // cerr << "push [" << tag << "][" << key << "] = " << str << "\n";
+            cerr << "push [" << tag << "][" << key << "] = " << str << "\n";
             dic[tag][key].push_back(str);
             continue;
         }
@@ -151,7 +152,7 @@ int QWQAnalyzer::analyze(){
             tmp.append(str);
             dic[tag][key].erase(it);
             dic[tag][key].push_back(tmp);
-            // cerr << "push [" << tag << "][" << key << "] = " << tmp << "\n";
+            cerr << "push [" << tag << "][" << key << "] = " << tmp << "\n";
         }
     }
     data.close();
@@ -214,7 +215,7 @@ int QWQReader::init(string path){ // Don't change it to reference.
             string optionsName = (*it).first;
             QWQAnalyzer newOptionsAnalyzer(optionsPath);
             newOptionsAnalyzer.analyze();
-            QWQRecorder aimRecorder;
+            optionRecorder aimRecorder;
             aimRecorder.init(newOptionsAnalyzer.dic);
             optionsModel newOptions;
             newOptions.set(aimRecorder);

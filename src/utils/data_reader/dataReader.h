@@ -9,7 +9,6 @@
 #include <map>
 
 #include "./../logger/logger.h"
-#include "./../models.h"
 
 extern Logger logs;
 
@@ -20,14 +19,17 @@ struct QWQRecorder {
     QWQRecorder(){}
     virtual ~QWQRecorder(){}
 
-    map < string , vector<string> > &getTag(string tag);
+    map< string , vector<string> > &getTag(string tag);
     vector<string> &getVal(string tag , string key);
 
     void init(map < string , map < string , vector<string> > > &dic);
     // [tag][key][v:val]
-    map < string , map < string , vector<string> > > dic;
+    map< string , map < string , vector<string> > > dic;
     string typeName;
 };
+
+
+#include "./../models.h"
 
 // Be used to analyze the data in the .qwq file.
 class QWQAnalyzer : public QWQRecorder {
