@@ -112,14 +112,13 @@ void Logger::printWithColor(int type,string msg){
 }
 
 void Logger::writetoLog(string msg){
-    if(!this->log.is_open()) log.open(this->logname,ios::out | ios::app);//Try opening the file
-    if(this->log.is_open()){
-        this->log << msg <<endl;
-        this->log.close();
-    }
-    else{//If the file still hasn't been opened
-        printWithColor(5,"Error when opening the log file. Please check if the ./logs dir has been created.");
-    }
+    // TODO: write path to this->filePath
+    string path = this->filePath;
+    ofstream logFile;
+    logFile.open("path",ios::out | ios::app);
+    logFile << msg << endl;
+    logFile.close();
+    // this->log << msg <<endl;
 }
 
 void Logger::close(){
