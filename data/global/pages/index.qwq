@@ -1,0 +1,6 @@
+# File to index the path of each option file. #
+Path {
+    initialMenu_about_page : ./data/global/pages/initialMenu_about_page.qwq ;
+    initialMenu_load_page : ./data/global/pages/initialMenu_load_page.qwq ;
+    initialMenu_new_page : ./data/global/pages/initialMenu_new_page.qwq ;
+}

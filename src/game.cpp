@@ -88,7 +88,7 @@ void Game::showTitle(){
 }
 
 void showPage(string path){
-
+    return;
 }
 
 void Game::showOption(const string &target){
@@ -108,21 +108,50 @@ void Game::showOption(const string &target){
     printAll(msg);  
 } 
 
-bool Game::dealOption(const string &target){
-    bool ret = false;
+void Game::dealOption(const string &target){
+    nextType=nextPath="";
     string str;
-    cin >> str;
-    // remember to deal the 
-
-    return ret;
+    bool valid=false;
+    cout<<"请输入选项：";
+    if(cin>>str){
+        logs.debug("str:"+str);
+        const vector<optionModel> &curOptions = (r.getOptions(target)).getOptions();
+        for(auto it = curOptions.begin();it != curOptions.end();++it){
+            if((*it).button.compare(str)==0){
+                nextType = (*it).type;
+                nextPath = (*it).targetPage;
+                valid = true;
+                break;
+            }
+        }
+        if(!valid){
+            if(lang=="zh") logs.info("输入不符合规格，请重新输入。");
+            else logs.info("The input is not valid. Please input again.");
+        }
+    }
+    else{
+        //useless
+        cin.clear();
+        cin.sync();
+    }
 }
 
 void Game::gameOpener(){
-
     showTitle();
     while(true){
         showOption( "initial_menu" );
-        if( dealOption( "initial_menu" ) ) break;
+        dealOption( "initial_menu" );
+        if(nextType.length()!=0) break;
     }
-
+    //while(true){
+        if(nextType == "page"){
+            ///showPage(nextPath);
+        }
+        else if(nextType == "option"){
+            showOption(nextPath);
+        }
+        else if(nextType== "exit"){
+            exit(0);
+        }
+    //}
 }

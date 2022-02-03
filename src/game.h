@@ -42,7 +42,7 @@ public:
     // Print usable options according to optionModel m    
     void showOption(const string &target);
     // Deal options according to optionModel m    
-    bool dealOption(const string &target);
+    void dealOption(const string &target);
 private:
     string lang;
 
@@ -56,6 +56,8 @@ private:
     string optionIDX;
     string pagesIDX;
 
+    string nextType;
+    string nextPath;
 };
 
 

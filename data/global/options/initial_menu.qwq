@@ -18,7 +18,7 @@ o_model {
 
 # head #
 o_0 {
-    use : o_1 , o_2 , o_3 ;
+    use : o_1 , o_2 , o_3 , o_4 ;
 }
 
 
@@ -53,4 +53,16 @@ o_3 {
 
     target_type : page ;
     target : ./data/global/pages/initialMenu_new_page.qwq ;
+}
+
+
+# Exit #
+o_4 {
+    des_zh : 退出 ;
+    des_en : Quit ;
+    level : 1 ;
+    button : quit ;
+
+    target_type : exit ;
+    target : NULL ;
 }
