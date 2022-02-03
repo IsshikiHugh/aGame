@@ -56,8 +56,8 @@ private:
     string optionIDX;
     string pagesIDX;
 
-    string nextType;
-    string nextPath;
+    string nextType{""};
+    string nextPath{""};
 };
 
 

@@ -109,31 +109,29 @@ void Game::showOption(const string &target){
 } 
 
 void Game::dealOption(const string &target){
-    nextType=nextPath="";
     string str;
+    nextType.clear();
+    nextPath.clear();
     bool valid=false;
+    logs.info("here OK");
     cout<<"请输入选项：";
-    if(cin>>str){
-        logs.debug("str:"+str);
-        const vector<optionModel> &curOptions = (r.getOptions(target)).getOptions();
-        for(auto it = curOptions.begin();it != curOptions.end();++it){
-            if((*it).button.compare(str)==0){
-                nextType = (*it).type;
-                nextPath = (*it).targetPage;
-                valid = true;
-                break;
-            }
-        }
-        if(!valid){
-            if(lang=="zh") logs.info("输入不符合规格，请重新输入。");
-            else logs.info("The input is not valid. Please input again.");
+    cin>>str;
+    logs.debug("str:"+str);
+    const vector<optionModel> &curOptions = (r.getOptions(target)).getOptions();
+    for(auto it = curOptions.begin();it != curOptions.end();++it){
+        if((*it).button.compare(str)==0){
+            nextType = (*it).type;
+            nextPath = (*it).targetPage;
+            valid = true;
+            break;
         }
     }
-    else{
-        //useless
-        cin.clear();
-        cin.sync();
+    if(!valid){
+        if(lang=="zh") logs.info("输入不符合规格，请重新输入。");
+        else logs.info("The input is not valid. Please input again.");
     }
+    cin.clear();
+    cin.sync();
 }
 
 void Game::gameOpener(){
