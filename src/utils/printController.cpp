@@ -113,3 +113,16 @@ vector<string> printController::generateIntoFrame(vector<string> &str){
 
     return ret;
 }
+
+string IntToStr(int x){
+    string ret{};
+    vector<int> number{};
+    while(x){
+        number.push_back(x%10);
+        x /= 10;
+    }
+    for(auto it = number.rbegin();it != number.rend();++it){
+        ret.push_back(*it);
+    }
+    return ret;
+}

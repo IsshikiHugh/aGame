@@ -7,29 +7,34 @@
 
 using namespace std;
 
-//==============================================================================//
+#include "./data_reader/dataReader.h"
+#include "./logger/logger.h"
 
-class OptionModel{
-public:
-    OptionModel();
-    OptionModel(string &&modelType);
-private:
-
-};
-
-
+extern Logger logs;
 
 //==============================================================================//
 
-class Model {
-public:
-    Model();
-    ~Model();
-    
-    OptionModel openerOption();
-private:
-    OptionModel *openerOptionPtr;
+struct optionModel{
+    string desZh;
+    string desEn;
+    string button;
+    string level;
+    string type;
+    string targetPage;
 };
+
+class optionsModel {
+public:
+    optionsModel(){}
+    virtual ~optionsModel(){}
+
+    void set(QWQRecorder aimRecorder);
+
+    const vector< optionModel > &getOptions();
+private:
+    vector< optionModel > options;
+};
+
 
 //==============================================================================//
 

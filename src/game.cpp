@@ -8,14 +8,37 @@ Game::Game(){
 Game::~Game(){}
 
 void Game::init(QWQReader r){
-    auto t = ( ( r.getStaticData() ).getTag("Base") );
+    auto t = ( ( r.getRecorder("static") ).getTag("Base") );
+    this->lang = t["languate"].front();
     this->gameVersion = t["game_version"].front();
     this->authors = t["author"];
     this->lastUpdateTime = t["update_time"].front();
     this->githubLink = t["github"].front();
     this->discription = t["discription"];
 
+
     logs.info("Game object initialized sucessfully.");
+}
+
+string Game::fillBlank(string str){
+    string ret{"NULL"};
+
+    // pre 
+    if(str[0] != '{'){
+        return ret;
+    }
+
+    // special
+    if(str == "{.game_version}"){
+        ret = gameVersion;
+    } else if(str == "{.update_time}"){
+        ret = lastUpdateTime;
+    } else if(str == "{.github}"){
+        ret = githubLink;
+    } else {
+        ret = "NULL";
+    }
+    return ret;
 }
 
 void Game::showTitle(){
@@ -71,11 +94,28 @@ void Game::showTitle(){
     return;
 }
 
-void Game::showOption(OptionModel m){
+void showPage(string path){
 
+}
+
+void Game::showOption(const string &target){
+    vector<string> msg_ori;
+    const vector<optionModel> &curOptions = (r.getOptions(target)).getOptions();
+    for(auto it = curOptions.begin();it != curOptions.end();++it){
+        string newMsg{"「"};
+        newMsg.append( (*it).button ).append("」");
+        if(lang == "zh"){
+            newMsg.append( (*it).desZh );
+        } else {
+            newMsg.append( (*it).desEn );
+        }
+        msg_ori.push_back(newMsg);
+    }
+    vector<string> msg = generateIntoFrame(msg_ori);
+    printAll(msg);  
 } 
 
-bool Game::dealOption(OptionModel m){
+bool Game::dealOption(const string &target){
     bool ret = false;
 
 
@@ -86,8 +126,8 @@ void Game::gameOpener(){
 
     showTitle();
     while(true){
-        showOption( model.openerOption() );
-        if( dealOption( model.openerOption() ) ) break;
+        showOption( "initial_menu" );
+        // if( dealOption( "initial_menu" ) ) break;
     }
 
 }

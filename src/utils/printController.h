@@ -26,7 +26,8 @@ namespace printController{
     // Be used to put all messages into a frame.
     vector<string> generateIntoFrame(vector<string> &str);
 
-
+    // Be used to change an integer to a string.
+    string IntToStr(int x);
 };
 
 

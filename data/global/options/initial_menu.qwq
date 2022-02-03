@@ -16,6 +16,11 @@ o_model {
 
 #
 
+# head #
+o_0 {
+    use : o_1 , o_2 , o_3 ;
+}
+
 
 # About #
 o_1 {

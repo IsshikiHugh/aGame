@@ -7,7 +7,6 @@
 QWQReader r;
 Game g;
 Logger logs;
-Model model;
 
 int main(){
     // printController::zhInit(); // Not necessarrily.

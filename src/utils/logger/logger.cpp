@@ -12,8 +12,7 @@ int Logger::init(string filename){
     if(!this->log.is_open()){
         printWithColor(5,"Error when opening the log file. Please check if the ./logs dir has been created.");
         return -1;
-    }
-    else{
+    } else {
         this->info("Logger initialized successfully.");
     }
     this->log.close();

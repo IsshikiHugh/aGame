@@ -1,5 +1,7 @@
 # Basic informations of the project. #
 Base {
+    # zh | en #
+    language : zh ; 
     game_version : 0.1 ;
     author : Isshiki Hugh , Silver Moon ;
     update_time : 2022.1.31 ;

@@ -9,6 +9,7 @@
 #include <map>
 
 #include "./../logger/logger.h"
+#include "./../models.h"
 
 extern Logger logs;
 
@@ -23,9 +24,9 @@ struct QWQRecorder {
     vector<string> &getVal(string tag , string key);
 
     void init(map < string , map < string , vector<string> > > &dic);
-    string typeName;
     // [tag][key][v:val]
     map < string , map < string , vector<string> > > dic;
+    string typeName;
 };
 
 // Be used to analyze the data in the .qwq file.
@@ -58,22 +59,23 @@ public:
     // Be used to deal Error Code.
     void dealReader(int code);
 
-    QWQRecorder &getStaticData();
-    QWQRecorder &getArchiveData();
-    QWQRecorder &getItemDictionary();
-    QWQRecorder &getMonsterDictionary();
-    QWQRecorder &getNpcDictionary();
-    QWQRecorder &getRoomDictionary();
-
-    
+    QWQRecorder &getRecorder(string name);
+    optionsModel &getOptions(string name);
 private:
     // TODO: Make it more "OOP\n".
-    QWQRecorder staticData;                 // Basic information of game.
-    QWQRecorder archiveData;                // Data of player.
-    QWQRecorder itemDictionary;             // Dictionary of items.
-    QWQRecorder monsterDictionary;          // Dictionary of monster.
-    QWQRecorder npcDictionary;              // Dictionary of npc.
-    QWQRecorder roomDictionary;             // Dictionary of room.
+    // QWQRecorder staticData;                 // Basic information of game.
+    // QWQRecorder archiveData;                // Data of player.
+    // QWQRecorder itemDictionary;             // Dictionary of items.
+    // QWQRecorder monsterDictionary;          // Dictionary of monster.
+    // QWQRecorder npcDictionary;              // Dictionary of npc.
+    // QWQRecorder roomDictionary;             // Dictionary of room.
+    map< string , QWQRecorder > data;
+    map< string , optionsModel > options;
+
+    string mainIDX;
+    string optionsIDX;
+    string pagesIDX;
+    string playersIDX;
 };
 
 #endif

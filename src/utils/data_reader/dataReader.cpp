@@ -201,34 +201,54 @@ int QWQReader::init(string path){ // Don't change it to reference.
     dealReader( indexAnalyzer.analyze() );
     auto &mv = indexAnalyzer.getTag("Path");
 
+    mainIDX = path;
+    if(mv.find("options_index") != mv.end()){
+        optionsIDX = mv["options_index"].front();
+        path = optionsIDX;
+        QWQAnalyzer optionDataAnalyzer(path);
+        optionDataAnalyzer.analyze();               // analyze according to the index of options file
+        auto vv = optionDataAnalyzer.dic;           // vv store the path of each options file
+        data["options"].init(vv);
+        for(auto it = vv["Path"].begin();it != vv["Path"].end();++it){
+            string optionsPath = ((*it).second).front();
+            string optionsName = (*it).first;
+            QWQAnalyzer newOptionsAnalyzer(optionsPath);
+            newOptionsAnalyzer.analyze();
+            QWQRecorder aimRecorder;
+            aimRecorder.init(newOptionsAnalyzer.dic);
+            optionsModel newOptions;
+            newOptions.set(aimRecorder);
+            options[optionsName] = newOptions;
+        }
+
+    }
+    if(mv.find("pages_index") != mv.end()){
+        pagesIDX = mv["pages_index"].front();
+    }
+    if(mv.find("players_index") != mv.end()){
+        playersIDX = mv["players_index"].front();
+    }
+
     path = mv["static"].front();
 
     QWQAnalyzer staticDataAnalyzer(path);
     staticDataAnalyzer.analyze();
     auto vv = staticDataAnalyzer.dic;
-    staticData.init(staticDataAnalyzer.dic);
+    data["static"].init(vv);
 
-    // TODO: find a way to init() each dic.
+
+
+
+
 
     logs.info("QWQReader initialized successfully.");
     return ret;
 }
 
-QWQRecorder &QWQReader::getStaticData(){
-    return this->staticData;
+QWQRecorder &QWQReader::getRecorder(string name){
+    return data[name];
 }
-QWQRecorder &QWQReader::getArchiveData(){
-    return this->archiveData;
-}
-QWQRecorder &QWQReader::getItemDictionary(){
-    return this->itemDictionary;
-}
-QWQRecorder &QWQReader::getMonsterDictionary(){
-    return this->monsterDictionary;
-}
-QWQRecorder &QWQReader::getNpcDictionary(){
-    return this->npcDictionary;
-}
-QWQRecorder &QWQReader::getRoomDictionary(){
-    return this->roomDictionary;
+
+optionsModel &QWQReader::getOptions(string name){
+    return options[name];
 }
