@@ -8,6 +8,10 @@
 #include <vector>
 #include <map>
 
+#include "./../logger/logger.h"
+
+extern Logger logs;
+
 using namespace std;
 
 // Base class for other recorder.

@@ -14,6 +14,8 @@ void Game::init(QWQReader r){
     this->lastUpdateTime = t["update_time"].front();
     this->githubLink = t["github"].front();
     this->discription = t["discription"];
+
+    logs.info("Game object initialized sucessfully.");
 }
 
 void Game::showTitle(){

@@ -1,6 +1,7 @@
 # File to index the path of each data file. #
 Path {
     static : ./data/global/static.qwq ;
+    
     options_index : ./data/global/options/index.qwq ;
     pages_index : ./data/global/pages/index.qwq ;
 }

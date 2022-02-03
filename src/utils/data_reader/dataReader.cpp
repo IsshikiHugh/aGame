@@ -202,13 +202,15 @@ int QWQReader::init(string path){ // Don't change it to reference.
     auto &mv = indexAnalyzer.getTag("Path");
 
     path = mv["static"].front();
-    cout << path << "\n";
+
     QWQAnalyzer staticDataAnalyzer(path);
     staticDataAnalyzer.analyze();
     auto vv = staticDataAnalyzer.dic;
     staticData.init(staticDataAnalyzer.dic);
 
     // TODO: find a way to init() each dic.
+
+    logs.info("QWQReader initialized successfully.");
     return ret;
 }
 

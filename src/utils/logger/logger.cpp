@@ -3,8 +3,9 @@
 using namespace std;
 
 int Logger::init(){
+
+    Logger::info("Logger initialized successfully.");
     return init(getTimeStr()+".log");
-    
 }
 
 int Logger::init(string filename){
@@ -20,7 +21,7 @@ string Logger::getTimeStr(){
     string res="";
     time_t now=time(0);
     tm *ltm=localtime(&now);
-    cout<<"year:"<<ltm->tm_year;
+    // cout<<"year:"<<ltm->tm_year;
     res.append(to_string(1900 + ltm->tm_year)+"-")
         .append(to_string(1 + ltm->tm_mon)+"-")
         .append(to_string(ltm->tm_mday)+"_")
