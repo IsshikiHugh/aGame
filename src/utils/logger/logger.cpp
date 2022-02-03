@@ -4,6 +4,7 @@ using namespace std;
 
 int Logger::init(){
     return init(getTimeStr()+".log");
+    
 }
 
 int Logger::init(string filename){
@@ -77,7 +78,9 @@ void Logger::fatal(string msg,int code){
     exit(code);
 }
 
+// TODO: Put prefix into the function.
 void Logger::printWithColor(int type,string prefix,string msg){
+    if(!display) return;
     /*
         F       B
         30      40      黑色
@@ -114,8 +117,8 @@ void Logger::printWithColor(int type,string prefix,string msg){
             break;
     }
     s1.append(prefix).append("\e[0m");
-    cout<<s1;
-    cout<<" "<<msg<<endl; 
+    cout << s1;
+    cout << " " << msg << endl; 
 }
 
 void Logger::writetoLog(string msg){

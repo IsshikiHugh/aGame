@@ -38,6 +38,8 @@ public:
     void close();
 
 private:
+    bool display = true;
+
     ofstream log;
 
     //Return a string in the format of "YYYY-MM-hour-min-sec"

@@ -1,0 +1,32 @@
+# File that stores the options info. #
+# The i'th option has the tag 'o_i' #
+
+# About #
+o_1 {
+    des_zh : 关于 ;
+    des_en : About ;
+    level : 1 ;
+
+    target_type : page ; 
+    target : ./data/global/pages/initialMenu_about_page.qwq ; 
+}
+
+# Load #
+o_2 {
+    des_zh : 载入存档 ;
+    des_en : Load Save;
+    level : 1 ;
+
+    target_type : page ;
+    target : ./data/global/pages/initialMenu_load_page.qwq ;
+}
+
+# New #
+o_3 {
+    des_zh : 新建存档 ;
+    des_en : New Save ;
+    level : 1 ;
+
+    target_type : page ;
+    target : ./data/global/pages/initialMenu_new_page.qwq ;
+}
