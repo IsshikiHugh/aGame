@@ -109,7 +109,12 @@ void Logger::printWithColor(int type,string msg){
 }
 
 void Logger::writetoLog(string msg){
-    this->log << msg <<endl;
+    // TODO: write path to this->filePath
+    string path = this->filePath;
+    ofstream logFile;
+    logFile.open("path",ios::out | ios::app);
+    logFile << msg << endl;
+    // this->log << msg <<endl;
 }
 
 void Logger::close(){

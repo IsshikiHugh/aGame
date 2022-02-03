@@ -38,6 +38,7 @@ public:
     void close();
 
 private:
+    string filePath;
     bool display = true;
 
     ofstream log;
