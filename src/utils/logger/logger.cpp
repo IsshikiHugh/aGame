@@ -7,8 +7,8 @@ int Logger::init(){
 }
 
 int Logger::init(string filename){
-    this->logname="./logs/"+filename;
-    this->log.open(this->logname,ios::out | ios::app);
+    this->filePath="./logs/"+filename;
+    this->log.open(this->filePath,ios::out | ios::app);
     if(!this->log.is_open()){
         printWithColor(5,"Error when opening the log file. Please check if the ./logs dir has been created.");
         return -1;
@@ -115,7 +115,7 @@ void Logger::writetoLog(string msg){
     // TODO: write path to this->filePath
     string path = this->filePath;
     ofstream logFile;
-    logFile.open("path",ios::out | ios::app);
+    logFile.open(path,ios::out | ios::app);
     logFile << msg << endl;
     logFile.close();
     // this->log << msg <<endl;
