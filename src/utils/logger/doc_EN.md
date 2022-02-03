@@ -37,7 +37,7 @@ logs.fatal("A fatal message",-1);//customize the error code -1
 
     Mind that when calling `fatal()`, the function will force the program to exit with code 0 (if you didn't customize the error code) after showing the message.
 
-4. Before the program exits, call `close()` to close the file output stream.
+4. Normally, the file output stream will be closed after writting to the file, but you still can use `close()` function to close the file stream manually.
 ```cpp
 logs.close();
 ```
