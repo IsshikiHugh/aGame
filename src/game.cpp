@@ -60,12 +60,12 @@ void Game::showTitle(){
     printAll(msg);
 
     //logger example
-    log.trace("trace");
-    log.debug("debug");
-    log.warn("warn");
-    log.info("info");
-    log.error("error");
-    log.fatal("fatal");
+    logs.trace("trace");
+    logs.debug("debug");
+    logs.warn("warn");
+    logs.info("info");
+    logs.error("error");
+    logs.fatal("fatal");
     return;
 }
 
