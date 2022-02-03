@@ -39,8 +39,10 @@ public:
 
 private:
     bool display = true;
-
+    
     ofstream log;
+
+    string logname;
 
     //Return a string in the format of "YYYY-MM-hour-min-sec"
     string getTimeStr();

@@ -3,17 +3,20 @@
 using namespace std;
 
 int Logger::init(){
-
-    Logger::info("Logger initialized successfully.");
     return init(getTimeStr()+".log");
 }
 
 int Logger::init(string filename){
-    this->log.open("./logs/"+filename,ios::out);
+    this->logname="./logs/"+filename;
+    this->log.open(this->logname,ios::out | ios::app);
     if(!this->log.is_open()){
         printWithColor(5,"Error when opening the log file. Please check if the ./logs dir has been created.");
         return -1;
     }
+    else{
+        this->info("Logger initialized successfully.");
+    }
+    this->log.close();
     return 0;
 }
 
@@ -109,7 +112,14 @@ void Logger::printWithColor(int type,string msg){
 }
 
 void Logger::writetoLog(string msg){
-    this->log << msg <<endl;
+    if(!this->log.is_open()) log.open(this->logname,ios::out | ios::app);//Try opening the file
+    if(this->log.is_open()){
+        this->log << msg <<endl;
+        this->log.close();
+    }
+    else{//If the file still hasn't been opened
+        printWithColor(5,"Error when opening the log file. Please check if the ./logs dir has been created.");
+    }
 }
 
 void Logger::close(){
