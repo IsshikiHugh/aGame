@@ -23,10 +23,14 @@ struct optionModel{
     string type;
     string targetPage;
 };
+struct pageLineModel{
+    vector<string> desZh;
+    vector<string> desEn;
+};
 
-struct optionRecorder {
-    optionRecorder(){}
-    virtual ~optionRecorder(){}
+struct recorderModel {
+    recorderModel(){}
+    virtual ~recorderModel(){}
 
     map< string , vector<string> > &getTag(string tag);
     vector<string> &getVal(string tag , string key);
@@ -42,13 +46,26 @@ public:
     optionsModel(){}
     virtual ~optionsModel(){}
 
-    void set(optionRecorder aimRecorder);
+    void set(recorderModel aimRecorder);
 
     const vector< optionModel > &getOptions();
 private:
     vector< optionModel > options;
 };
 
+class pagesModel{
+public:
+    pagesModel(){}
+    virtual ~pagesModel(){}
+
+    void set(recorderModel aimRecorder);
+
+    const vector< pageLineModel > &getPage();
+    const string &getOptions();
+private:
+    vector< pageLineModel > pageMsgs;
+    string optionsName;
+};
 
 //==============================================================================//
 

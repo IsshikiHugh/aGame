@@ -1,4 +1,5 @@
 # File to index the path of each option file. #
 Path {
     initial_menu : ./data/global/options/initial_menu.qwq ;
+    back_to_menu : ./data/global/options/back_to_menu.qwq ;
 }

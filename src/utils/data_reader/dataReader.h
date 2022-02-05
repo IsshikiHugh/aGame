@@ -63,6 +63,7 @@ public:
 
     QWQRecorder &getRecorder(string name);
     optionsModel &getOptions(string name);
+    pagesModel &getPage(string name);
 private:
     // TODO: Make it more "OOP\n".
     // QWQRecorder staticData;                 // Basic information of game.
@@ -73,6 +74,7 @@ private:
     // QWQRecorder roomDictionary;             // Dictionary of room.
     map< string , QWQRecorder > data;
     map< string , optionsModel > options;
+    map< string , pagesModel > page;
 
     string mainIDX;
     string optionsIDX;

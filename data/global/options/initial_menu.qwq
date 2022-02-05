@@ -2,8 +2,7 @@
 # The i'th option has the tag 'o_i' #
 
 # Use the model like this #
-#
-
+# --begin--
 o_model {
     des_zh : write Chinese description here ;
     des_en : write English description here ;
@@ -13,8 +12,7 @@ o_model {
     target_type : state the type of the option here(which decide the function of the option) ;
     target : write the path of the target here ;
 }
-
-#
+--end-- #
 
 # head #
 o_0 {
@@ -30,7 +28,7 @@ o_1 {
     level : 1 ;
 
     target_type : page ; 
-    target : ./data/global/pages/initialMenu_about_page.qwq ; 
+    target : initialMenu_about_page ; 
 }
 
 # Load #
@@ -41,7 +39,7 @@ o_2 {
     level : 1 ;
 
     target_type : page ;
-    target : ./data/global/pages/initialMenu_load_page.qwq ;
+    target : initialMenu_load_page ;
 }
 
 # New #
@@ -52,7 +50,7 @@ o_3 {
     button : new ;
 
     target_type : page ;
-    target : ./data/global/pages/initialMenu_new_page.qwq ;
+    target : initialMenu_new_page ;
 }
 
 

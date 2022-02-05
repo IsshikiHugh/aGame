@@ -14,30 +14,61 @@ void Game::init(QWQReader r){
     this->authors = t["author"];
     this->lastUpdateTime = t["update_time"].front();
     this->githubLink = t["github"].front();
-    this->discription = t["discription"];
+    this->description = t["description"];
 
 
     logs.info("Game object initialized sucessfully.");
 }
 
-string Game::fillBlank(string str){
-    string ret{"NULL"};
+vector<string> Game::fillBlanks(string str){
+    logs.info("fill blanks begin");
+    vector<string> ret{"NULL"};
 
     // pre 
     if(str[0] != '{'){
+        logs.info("fill blanks end because no need");
         return ret;
     }
 
+    string pre,suf;
+    stringstream st;
+    st << str;
+    st >> pre >> suf;
+    suf = suf.substr(1,suf.size()-2);
+
     // special
-    if(str == "{.game_version}"){
-        ret = gameVersion;
-    } else if(str == "{.update_time}"){
-        ret = lastUpdateTime;
-    } else if(str == "{.github}"){
-        ret = githubLink;
+    if(pre == "{.game_version}"){
+        ret.push_back(gameVersion);
+    } else if(pre == "{.update_time}"){
+        ret.push_back(lastUpdateTime);
+    } else if(pre == "{.github}"){
+        ret.push_back(githubLink);
+    } else if(pre == "{.space}"){
+        ret.push_back(" ");
+    } else if(pre == "{.authors}"){
+        for(auto it = authors.begin();it != authors.end();++it){
+            string ss{""};
+            if(it != authors.begin()){
+                ss.append(suf).append(*it);
+            } else {
+                ss.append(*it);
+            }
+            ret.push_back(ss);
+        }
+    } else if(pre == "{.description}"){
+        for(auto it = description.begin();it != description.end();++it){
+            string ss{""};
+            if(it != description.begin()){
+                ss.append(suf).append(*it);
+            } else {
+                ss.append(*it);
+            }
+            ret.push_back(ss);
+        }
     } else {
-        ret = "NULL";
+        ret.front() = "NULL";
     }
+    logs.info("fill blanks end with size = " + IntToStr(ret.size()) );
     return ret;
 }
 
@@ -61,39 +92,57 @@ void Game::showTitle(){
         " 〔Ẕ〕 写它可能只是因为......这很有趣？ (乐)",
         ""
     };
-    
-    /*
-    // TODO: Make things below more tiddy.
-    string moreMsg("  #  Version : ");
-    moreMsg.append(this->gameVersion);
-    msg.push_back(moreMsg);
-    
-    moreMsg = "  #  Last Update : ";
-    moreMsg.append(this->lastUpdateTime);
-    msg.push_back(moreMsg);
-
-
-    // TODO: move it into option.
-    moreMsg = "  #  Authors : ";
-    for(auto it = this->authors.begin();it != this->authors.end();++it){
-        if(it != this->authors.begin()){
-            moreMsg = "               ";
-        }
-        moreMsg.append(*it);
-        msg.push_back(moreMsg);
-    }*/
 
     printAll(msg);
     return;
 }
 
-void showPage(string path){
+string Game::showPage(const string &target){
+    logs.info("show page");
+    string targetOption;
+    vector<string> msg_ori;
+    const vector<pageLineModel> &curPage = (r.getPage(target)).getPage();
+    targetOption = (r.getPage(target)).getOptions();
+    for(auto it = curPage.begin();it != curPage.end();++it){
+        vector<string> oriLine;
+        if(lang == "zh"){
+            oriLine = (*it).desZh;
+        } else {
+            oriLine = (*it).desEn;
+        }
+
+        string newLine{""};
+        for(auto ll = oriLine.begin();ll != oriLine.end();++ll){
+            vector<string> fillMsg = fillBlanks(*ll);
+            if(fillMsg.size() == 1){
+                newLine.append(*ll);
+            } else {
+                for(auto f = fillMsg.begin()+1;f != fillMsg.end();++f){
+                    newLine.append(*f);
+                }
+            }
+        }
+        if(!newLine.empty()) msg_ori.push_back(newLine);
+    }
+    vector<string> msg = generateIntoFrame(msg_ori);
+    printAll(msg);
+    return targetOption;
+}
+
+void Game::gotoPage(const string &target){
+    string targetName;
+    clearScreen();
+    targetName = showPage(target);
+    logs.debug("page target = " + targetName);
+    showOption( targetName );
+    dealOption( targetName );
     return;
 }
 
 void Game::showOption(const string &target){
     vector<string> msg_ori;
     const vector<optionModel> &curOptions = (r.getOptions(target)).getOptions();
+    logs.info("find cur " + target + " 's size = " + IntToStr(curOptions.size()));
     for(auto it = curOptions.begin();it != curOptions.end();++it){
         string newMsg{"「"};
         newMsg.append( (*it).button ).append("」");
@@ -109,13 +158,13 @@ void Game::showOption(const string &target){
 } 
 
 void Game::dealOption(const string &target){
-    string str;
-    nextType.clear();
-    nextPath.clear();
+    logs.info("dealOption begin");
+    string str{""};
+    string nextType{""};
+    string nextPath{""};
     bool valid=false;
-    logs.info("here OK");
-    cout<<"请输入选项：";
-    cin>>str;
+    cout << "请输入目标选项关键字：\n";
+    cin >> str;
     logs.debug("str:"+str);
     const vector<optionModel> &curOptions = (r.getOptions(target)).getOptions();
     for(auto it = curOptions.begin();it != curOptions.end();++it){
@@ -127,29 +176,30 @@ void Game::dealOption(const string &target){
         }
     }
     if(!valid){
-        if(lang=="zh") logs.info("输入不符合规格，请重新输入。");
-        else logs.info("The input is not valid. Please input again.");
+        if(lang=="zh") cout << "这是个无效的选项！请重试！\n";
+        else cout << "Invalid option! Please try again.\n";
+        dealOption(target);
+        return;
     }
     cin.clear();
     cin.sync();
+
+    if(nextType == "page"){
+        gotoPage(nextPath);
+    } else if(nextType == "exit"){
+        exit(0);
+    } else if(nextType == "options"){
+        showOption(nextPath);
+    } else if(nextType == "initialMenuPage"){
+        gameOpener();
+    }
+
+    logs.info("dealOption end");
 }
 
 void Game::gameOpener(){
+    clearScreen();
     showTitle();
-    while(true){
-        showOption( "initial_menu" );
-        dealOption( "initial_menu" );
-        if(nextType.length()!=0) break;
-    }
-    //while(true){
-        if(nextType == "page"){
-            ///showPage(nextPath);
-        }
-        else if(nextType == "option"){
-            showOption(nextPath);
-        }
-        else if(nextType== "exit"){
-            exit(0);
-        }
-    //}
+    showOption( "initial_menu" );
+    dealOption( "initial_menu" );
 }

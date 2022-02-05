@@ -152,7 +152,7 @@ int QWQAnalyzer::analyze(){
             tmp.append(str);
             dic[tag][key].erase(it);
             dic[tag][key].push_back(tmp);
-            cerr << "push [" << tag << "][" << key << "] = " << tmp << "\n";
+            cerr << "edit [" << tag << "][" << key << "] = " << tmp << "\n";
         }
     }
     data.close();
@@ -204,6 +204,7 @@ int QWQReader::init(string path){ // Don't change it to reference.
 
     mainIDX = path;
     if(mv.find("options_index") != mv.end()){
+        logs.info("QWQreader options set begin");
         optionsIDX = mv["options_index"].front();
         path = optionsIDX;
         QWQAnalyzer optionDataAnalyzer(path);
@@ -215,16 +216,34 @@ int QWQReader::init(string path){ // Don't change it to reference.
             string optionsName = (*it).first;
             QWQAnalyzer newOptionsAnalyzer(optionsPath);
             newOptionsAnalyzer.analyze();
-            optionRecorder aimRecorder;
+            recorderModel aimRecorder;
             aimRecorder.init(newOptionsAnalyzer.dic);
             optionsModel newOptions;
             newOptions.set(aimRecorder);
             options[optionsName] = newOptions;
         }
-
+        logs.info("QWQreader options set end");
     }
     if(mv.find("pages_index") != mv.end()){
+        logs.info("QWQreader pages set begin");
         pagesIDX = mv["pages_index"].front();
+        path = pagesIDX;
+        QWQAnalyzer pageDataAnalyzer(path);
+        pageDataAnalyzer.analyze();
+        auto vv = pageDataAnalyzer.dic;
+        data["pages"].init(vv);
+        for(auto it = vv["Path"].begin();it != vv["Path"].end();++it){
+            string pagesPath = ((*it).second).front();
+            string pagesName = (*it).first;
+            QWQAnalyzer newPagesAnalyzer(pagesPath);
+            newPagesAnalyzer.analyze();
+            recorderModel aimRecorder;
+            aimRecorder.init(newPagesAnalyzer.dic);
+            pagesModel newPage;
+            newPage.set(aimRecorder);
+            page[pagesName] = newPage;
+        }
+        logs.info("QWQreader pages set end");
     }
     if(mv.find("players_index") != mv.end()){
         playersIDX = mv["players_index"].front();
@@ -252,4 +271,8 @@ QWQRecorder &QWQReader::getRecorder(string name){
 
 optionsModel &QWQReader::getOptions(string name){
     return options[name];
+}
+
+pagesModel &QWQReader::getPage(string name){
+    return page[name];
 }

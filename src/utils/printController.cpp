@@ -114,15 +114,20 @@ vector<string> printController::generateIntoFrame(vector<string> &str){
     return ret;
 }
 
-string IntToStr(int x){
-    string ret{};
+string printController::IntToStr(int x){
+    string ret{""};
     vector<int> number{};
     while(x){
         number.push_back(x%10);
         x /= 10;
     }
     for(auto it = number.rbegin();it != number.rend();++it){
-        ret.push_back(*it);
+        ret.push_back('0' + *it);
     }
+    if(number.empty()) ret = "0";
     return ret;
+}
+
+void printController::clearScreen(){
+    for(int i = 1;i <= 5;++i) cout << "\n\n\n\n\n\n\n\n\n\n"; 
 }

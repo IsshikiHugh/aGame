@@ -8,7 +8,6 @@
 
 using namespace std;
 
-
 namespace printController{
 
     ostream &tab(ostream &ostr);
@@ -28,6 +27,9 @@ namespace printController{
 
     // Be used to change an integer to a string.
     string IntToStr(int x);
+
+    // Print several '\n' to clear the screen.
+    void clearScreen();
 };
 
 
