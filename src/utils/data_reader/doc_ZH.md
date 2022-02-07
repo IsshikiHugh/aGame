@@ -22,3 +22,25 @@ tag {
 }
 
 ```
+
+## 文档
+
+### `QWQAnalyzer` 
+
+#### `QWQAnalyzer newAnalyzer(string filePath)`
+
+- 声明时输入一个string类型的变量filePath来指定配置文件路径以构造一个Analyzer。
+
+#### `void QWQAnalyzer::analyze()`
+
+- 调用绑定了filePath的analyzer，执行配置文件解析
+
+#### `map< string , vector<string> > &QWQAnalyzer::getTag(string tag)`
+
+- 输入一个string类型的tag
+- 返回配置文件中对应tag的信息，以`map< string , vector<string> >`返回引用
+
+#### `vector<string> &QWQAnalyzer::getVal(string tag , string key)`
+
+- 输入string类型的tag和key
+- 返回配置文件中对应tag和key的信息，以`vector<string>`返回引用

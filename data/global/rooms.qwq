@@ -1,0 +1,13 @@
+# The file to store the room info. #
+# Use the form bellow. #
+
+
+#
+<roomUID> {
+    name : <roomName> ;
+    exit : <northRoom> , <eastRoom> , <sorthRoom> , <westRoom> ; (set NULL if not exist)
+    
+    type : <roomType> ;
+    (set other if certain type need)
+}
+#
