@@ -7,11 +7,14 @@
 using std::string;
 using std::map;
 using std::vector;
+#include "./utils/logger/logger.h"
+
+extern Logger logs;
 
 class Room{
 public:
     Room(){}
-    virtual ~Room(){}
+    ~Room(){}
 
     virtual void set(string uid,map< string , vector<string> > r);
 
@@ -23,9 +26,13 @@ public:
     string &getNextRoomUID(int dir);
 
     string &getRoomUID(){ return roomUID; }
+
+    bool isBegin(){ return isBeginRoom; }
 private:
     // set the next room of thisRoom in certain direction as thatRoom
     void linkToRoom(string thatUID,int dir);
+
+    bool isBeginRoom = false;
 
     string roomName;
     string roomUID;

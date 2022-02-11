@@ -4,5 +4,7 @@ Path {
     
     options_index : ./data/global/options/index.qwq ;
     pages_index : ./data/global/pages/index.qwq ;
+    rooms_index : ./data/global/rooms.qwq ;
+    
     players_index : ./data/global/players/index.qwq ;
 }

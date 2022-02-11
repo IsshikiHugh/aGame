@@ -11,3 +11,10 @@
     (set other if certain type need)
 }
 #
+
+1 {
+    name : Hello Room ;
+    exit : 2 , NULL , NULL , NULL ;
+
+    type : beginRoom ;
+}

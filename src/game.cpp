@@ -16,6 +16,7 @@ void Game::init(QWQReader r){
     this->githubLink = t["github"].front();
     this->description = t["description"];
 
+    
 
     logs.info("Game object initialized sucessfully.");
 }

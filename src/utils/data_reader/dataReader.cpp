@@ -8,6 +8,7 @@
  * # { } : , ;
  */
 int QWQAnalyzer::analyze(){
+    dic.clear();
     int ret = 1; // nothing wrong
     ifstream data;
     data.open(this->path,ios::in);
@@ -247,6 +248,28 @@ int QWQReader::init(string path){ // Don't change it to reference.
     }
     if(mv.find("players_index") != mv.end()){
         playersIDX = mv["players_index"].front();
+    }
+    if(mv.find("rooms_index") != mv.end()){
+        logs.info("QWQreader rooms set begin");
+        roomsIDX = mv["rooms_index"].front();
+        path = roomsIDX;
+        QWQAnalyzer newRooms(path);
+        newRooms.analyze();
+        auto newMap = newRooms.dic;
+        vector<Room> newRoomsList;
+        for(auto it = newMap.begin();it != newMap.end();++it){
+
+            string uid = it->first;
+            auto roomInfo = it->second;
+            Room newRoom;
+            newRoom.set(uid,roomInfo);
+            newRoomsList.push_back(newRoom);
+        }
+        if(newRoomsList.empty()){
+            logs.fatal("Rooms setting error!");
+        }
+        m.makeMap(newRoomsList);
+        logs.info("QWQreader rooms set end");
     }
 
     path = mv["static"].front();

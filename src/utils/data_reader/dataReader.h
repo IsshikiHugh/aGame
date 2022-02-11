@@ -9,8 +9,10 @@
 #include <map>
 
 #include "./../logger/logger.h"
+#include "./../../map.h"
 
 extern Logger logs;
+extern Map m;
 
 using namespace std;
 
@@ -79,6 +81,7 @@ private:
     string mainIDX;
     string optionsIDX;
     string pagesIDX;
+    string roomsIDX;
     string playersIDX;
 };
 

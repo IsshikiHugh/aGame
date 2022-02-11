@@ -11,8 +11,12 @@ public:
     Map(){};
     ~Map(){};
 
+    // to make the map
+    void makeMap(vector<Room> rooms);
     // push Room into map
     void pushGrid(Room r){ grid[r.getRoomUID()] = r; }
+    // chek error
+    bool checkError();
     // get the beginRoom
     Room &getBeginRoom(){ return grid[beginRoomUID]; }
     // get the nextRoom

@@ -3,10 +3,14 @@
 void Room::set(string uid,map< string , vector<string> > r){
     roomUID = uid;
     roomName = r["name"].front();
+    logs.debug("here!" + roomName);
     for(int d = 0;d <= 3;++d){
-        exitUID[d] = r["room"][d];
+        exitUID[d] = r["exit"][d];
     }
     type = r["type"].front();
+    if(type == "beginRoom"){
+        isBeginRoom = true;
+    }
 }
 
 
