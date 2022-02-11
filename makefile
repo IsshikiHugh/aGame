@@ -89,4 +89,4 @@ clean :
 	./logs/*.log \
 	./src/map.o \
 	./src/room.o \
-	./src/contorllers/player.o
+	./src/controllers/player.o
