@@ -2,4 +2,6 @@
 Path {
     initial_menu : ./data/global/options/initial_menu.qwq ;
     back_to_menu : ./data/global/options/back_to_menu.qwq ;
+    create_new_player : ./data/global/options/create_new_player.qwq ;
+    load_player : ./data/global/options/load_player.qwq ;
 }

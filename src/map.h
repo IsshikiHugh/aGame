@@ -23,6 +23,9 @@ public:
     Room &getNextRoom(string currentUID,int dir){
         return grid[ grid[currentUID].getNextRoomUID(dir) ];
     }
+    string &getBeginRoomID(){
+        return beginRoomUID;
+    }
     
 private:
     string beginRoomUID;

@@ -1,0 +1,26 @@
+# File that stores the page info. #
+# The i'th line has the tag 'l_i' #
+
+# Use the model like this #
+# --begin--
+l_model {
+    des_zh : write Chinese description here ;
+    des_en : write English description here ;
+}
+--end-- #
+
+# head #
+l_0 {
+    use : l_1 , l_2 ;
+    options : create_new_player ;
+}
+
+l_1 {
+    des_zh : 请输入您想创建的角色的名字 ;
+    des_en : Please enter the nick name of the character you want to create. ;
+}
+
+l_2 {
+    des_zh : 请输入 create <你的角色名称(不可以存在空格)> ;
+    des_en : Please enter : create <your nick name(NO SPACE)> ;
+}

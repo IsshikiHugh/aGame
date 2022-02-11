@@ -1,0 +1,42 @@
+# File that stores the options info. #
+# The i'th option has the tag 'o_i' #
+
+# Use the model like this #
+# --begin--
+o_model {
+    des_zh : write Chinese description here ;
+    des_en : write English description here ;
+    button : write word to use the option here ;
+    level : write the priority level here(which decide the color of the option) ;
+
+    target_type : state the type of the option here(which decide the function of the option) ;
+    target : write the path of the target here ;
+}
+--end-- #
+
+# head #
+o_0 {
+    use : o_1 , o_2 ;
+}
+
+# Load #
+o_1 {
+    des_zh : 载入角色 ;
+    des_en : Load Character ;
+    level : 1 ;
+    button : load ;
+
+    target_type : loadCharacter ;
+    target : NULL ;
+}
+
+# Exit #
+o_2 {
+    des_zh : 返回 ;
+    des_en : Back ;
+    level : 1 ;
+    button : back ;
+
+    target_type : initialMenuPage ;
+    target : NULL ;
+}

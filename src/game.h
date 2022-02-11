@@ -12,11 +12,13 @@ using namespace std;
 #include "./utils/models.h"
 #include "./utils/logger/logger.h"
 #include "./utils/data_reader/dataReader.h"
+#include "./controllers/player.h"
 
 using namespace printController;
 
 extern QWQReader r;
 extern Logger logs;
+extern Player p;
 
 class Game {
 public:

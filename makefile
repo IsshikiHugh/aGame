@@ -5,7 +5,8 @@ run.exe :	./src/main.o \
 			./src/utils/logger/logger.o \
 			./src/map.o \
 			./src/room.o \
-			./src/utils/data_reader/dataReader.o
+			./src/utils/data_reader/dataReader.o \
+			./src/controllers/player.o
 	g++ -o run.exe \
 	./src/main.o \
 	./src/game.o \
@@ -14,7 +15,8 @@ run.exe :	./src/main.o \
 	./src/utils/logger/logger.o \
 	./src/utils/data_reader/dataReader.o \
 	./src/map.o \
-	./src/room.o
+	./src/room.o \
+	./src/controllers/player.o
 
 main.o : 	./src/main.cpp \
 			./src/game.h \
@@ -22,7 +24,8 @@ main.o : 	./src/main.cpp \
 			./src/utils/logger/logger.h \
 			./src/utils/data_reader/dataReader.h \
 			./src/utils/printController.h \
-			./src/map.h
+			./src/map.h \
+			./src/controllers/player.h
 	g++ \
 	-o ./src/main.o \
 	-c ./src/main.cpp 
@@ -38,7 +41,8 @@ game.o : 	./src/game.cpp \
 			./src/utils/printController.h \
 			./src/utils/models.h \
 			./src/utils/logger/logger.h \
-			./utils/data_reader/dataReader.h
+			./utils/data_reader/dataReader.h \
+			./src/controllers/player.h
 	g++ \
 	-o ./src/game.o \
 	-c ./src/game.cpp
@@ -67,10 +71,12 @@ map.o : ./src/map.cpp ./src/map.h ./src/room.h
 	-c ./src/map.cpp
 room.o : ./src/room.cpp ./src/room.h ./src/utils/logger/logger.h
 	g++ \
-	-o \
 	-o ./src/room.o \
 	-c ./src/room.cpp
-
+player.o : ./src/controllers/player.cpp ./src/controllers/player.h
+	g++ \
+	-o ./src/controllers/player.o \
+	-c ./src/controllers/player.cpp
 clean : 
 	rm \
 	run.exe \
@@ -82,4 +88,5 @@ clean :
 	./src/utils/logger/logger.o \
 	./logs/*.log \
 	./src/map.o \
-	./src/room.o
+	./src/room.o \
+	./src/contorllers/player.o

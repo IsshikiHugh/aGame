@@ -246,9 +246,6 @@ int QWQReader::init(string path){ // Don't change it to reference.
         }
         logs.info("QWQreader pages set end");
     }
-    if(mv.find("players_index") != mv.end()){
-        playersIDX = mv["players_index"].front();
-    }
     if(mv.find("rooms_index") != mv.end()){
         logs.info("QWQreader rooms set begin");
         roomsIDX = mv["rooms_index"].front();

@@ -1,8 +1,6 @@
 #include "game.h"
 
 Game::Game(){
-    // TODO: read config file
-
 }
 
 Game::~Game(){}
@@ -182,8 +180,7 @@ void Game::dealOption(const string &target){
         dealOption(target);
         return;
     }
-    cin.clear();
-    cin.sync();
+
 
     if(nextType == "page"){
         gotoPage(nextPath);
@@ -193,7 +190,44 @@ void Game::dealOption(const string &target){
         showOption(nextPath);
     } else if(nextType == "initialMenuPage"){
         gameOpener();
+    } else if(nextType == "createCharacter"){
+        string name;
+        cin >> name;
+        bool ex = p.checkExit(name);
+        if(ex){
+            if(lang == "zh"){
+                cout << "你不能创建一个已有的角色！请重试！" << endl;
+            } else {
+                cout << "You can't create a existed character!Please try again!" << endl;
+            }
+            dealOption(target);
+        }
+        p.set_(name);
+        p.load();
+        logs.fatal("ok!");
+        // TODO: start!
+        gotoPage(nextPath);
+    } else if(nextType == "loadCharacter"){
+        string name;
+        cin >> name;
+        bool ex = p.checkExit(name);
+        if(!ex){
+            if(lang == "zh"){
+                cout << "你不能载入一个不存在的角色！请重试！" << endl;
+            } else {
+                cout << "You can't load a unexisted character!Please try again!" << endl;
+            }
+            dealOption(target);
+        }
+        p.set_(name);
+        p.load();
+        logs.fatal("ok!");
+        // TODO: start!
+        gotoPage(nextPath);
     }
+
+    cin.clear();
+    cin.sync();
 
     logs.info("dealOption end");
 }
