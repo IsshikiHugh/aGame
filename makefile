@@ -90,3 +90,9 @@ clean :
 	./src/map.o \
 	./src/room.o \
 	./src/controllers/player.o
+cleanLogs :
+	rm ./logs/*.log
+
+cleanSave :
+	rm ./data/players/*.qwq ./data/players/tot.lst ; touch ./data/players/tot.lst
+	

@@ -14,7 +14,21 @@
 
 1 {
     name : Hello Room ;
-    exit : 2 , NULL , NULL , NULL ;
+    exit : 2 , 3 , NULL , NULL ;
 
     type : beginRoom ;
+}
+
+2 {
+    name : Wild Path ;
+    exit : NULL , NULL , 1 , NULL ;
+
+    type : wild ;
+}
+
+3 {
+    name : Wild Path ;
+    exit : NULL , NULL , NULL , 1 ;
+
+    type : wild ;
 }

@@ -2,9 +2,9 @@
 Base {
     # zh | en #
     language : zh ; 
-    game_version : 0.1 ;
+    game_version : 0.4 ;
     author : Isshiki Hugh , Silver Moon ;
-    update_time : 2022.1.31 ;
+    update_time : 2022.2.12 ;
     github : https://github.com/IsshikiHugh/aGame ;
     description : 这是一个一时兴起而开发出来的游戏 ;
 }

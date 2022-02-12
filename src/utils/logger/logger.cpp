@@ -7,6 +7,10 @@ int Logger::init(){
 }
 
 int Logger::init(string filename){
+    ifstream ist;
+    ist.open("./logs/.LogsHere",std::ios::in);
+    ist >> display;
+    ist.close();
     this->filePath="./logs/"+filename;
     this->log.open(this->filePath,ios::out | ios::app);
     if(!this->log.is_open()){
@@ -70,6 +74,9 @@ void Logger::fatal(string msg,int code){
 }
 
 void Logger::printWithColor(int type,string msg){
+    if(!display){
+        return;
+    }
     /*
         F       B
         30      40      黑色

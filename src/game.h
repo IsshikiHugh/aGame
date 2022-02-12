@@ -47,6 +47,10 @@ public:
     void showOption(const string &target);
     // Deal options according to optionModel m    
     void dealOption(const string &target);
+    // deal map page
+    void showMap();
+    // run the map
+    void mapRunner();
 private:
     string lang;
 

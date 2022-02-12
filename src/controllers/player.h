@@ -30,24 +30,11 @@ public:
     // update data
     void update(PlayerModel &to);
 
-    bool checkExit(string name){
-        if(st.find(name) == st.end()){
-            return false;
-        } else {
-            return true;
-        }
-    }
+    bool checkExit(string name);
 
-    void set_(string name){
-        nickName = name;
-        if(st.find(name) == st.end()){
-            st.insert(name);
-            ofstream ost("./data/players/tot.lst",std::ios::out | std::ios::app);
-            ost << name << endl;
-            ost.close();
-            createPlayer(name,m.getBeginRoomID());
-        }
-    }
+    void set_(string name);
+
+    string getTmpRoom(){ return tmpRoom; }
 
 private:
     unsigned long long uid;

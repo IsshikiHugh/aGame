@@ -66,3 +66,22 @@ unsigned long long Player::StrToULL(string x){
     }
     return ret;
 }
+
+bool Player::checkExit(string name){
+    if(st.find(name) == st.end()){
+        return false;
+    } else {
+        return true;
+    }
+}
+
+void Player::set_(string name){
+        nickName = name;
+        if(st.find(name) == st.end()){
+            st.insert(name);
+            ofstream ost("./data/players/tot.lst",std::ios::out | std::ios::app);
+            ost << name << endl;
+            ost.close();
+            createPlayer(name,m.getBeginRoomID());
+        }
+    }

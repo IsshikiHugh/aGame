@@ -27,6 +27,8 @@ public:
 
     string &getRoomUID(){ return roomUID; }
 
+    string &getRoomName(){ return roomName; }
+
     bool isBegin(){ return isBeginRoom; }
 private:
     // set the next room of thisRoom in certain direction as thatRoom
@@ -39,9 +41,9 @@ private:
 
     // 0 North
     // 1 East                0
-    // 2 Sourth           4     1
-    // 3 West                3
-    string exitUID[4];
+    // 2 Sourth           3     1
+    // 3 West                2
+    string exitUID[4] = {};
     string type;
 };
 

@@ -64,7 +64,22 @@ vector<string> Game::fillBlanks(string str){
             }
             ret.push_back(ss);
         }
-    } else {
+    } else if(pre == "{.players}"){
+        ifstream ist;
+        ist.open("./data/players/tot.lst"); 
+        bool isFirst = true;
+        string ss;
+        ist >> ss;
+        while(!ist.eof()){
+            if(!isFirst){
+                ss = suf + ss;
+            } 
+            isFirst = false;
+            ret.push_back(ss);
+            ist >> ss;
+        }
+        ist.close();
+    }else {
         ret.front() = "NULL";
     }
     logs.info("fill blanks end with size = " + IntToStr(ret.size()) );
@@ -183,6 +198,7 @@ void Game::dealOption(const string &target){
 
 
     if(nextType == "page"){
+        logs.debug("now goto page " + target);
         gotoPage(nextPath);
     } else if(nextType == "exit"){
         exit(0);
@@ -204,9 +220,7 @@ void Game::dealOption(const string &target){
         }
         p.set_(name);
         p.load();
-        logs.fatal("ok!");
-        // TODO: start!
-        gotoPage(nextPath);
+        mapRunner();
     } else if(nextType == "loadCharacter"){
         string name;
         cin >> name;
@@ -221,9 +235,7 @@ void Game::dealOption(const string &target){
         }
         p.set_(name);
         p.load();
-        logs.fatal("ok!");
-        // TODO: start!
-        gotoPage(nextPath);
+        mapRunner();
     }
 
     cin.clear();
@@ -237,4 +249,108 @@ void Game::gameOpener(){
     showTitle();
     showOption( "initial_menu" );
     dealOption( "initial_menu" );
+}
+
+void Game::mapRunner(){
+    showMap();
+    vector<string> msg_ori;
+    string ele = "「go」";
+    if(lang == "zh"){
+        ele += "移动";
+    } else {
+        ele += "move";
+    }
+    msg_ori.push_back(ele);
+    ele = "「quit」";
+    if(lang == "zh"){
+        ele += "退出";
+    } else {
+        ele += "exit";
+    }
+    msg_ori.push_back(ele);
+    vector<string> msg = generateIntoFrame(msg_ori);
+    printAll(msg);
+
+_goto_mapDealOption:
+
+    string readin;
+    cin >> readin;
+    if(readin == "go"){
+        string dir;
+        cin >> dir;
+        int dirN;
+        if(dir == "North" || dir == "north" || dir == "n"){
+            dirN = 0;
+        } else if(dir == "East" || dir == "east" || dir == "e"){
+            dirN = 1;
+        } else if(dir == "South" || dir == "south" || dir == "s"){
+            dirN = 2;
+        } else if(dir == "West" || dir == "west" || dir == "w"){
+            dirN = 3;
+        } else {
+            goto _goto_mapErrorGo_;
+        }
+        PlayerModel updataP;
+        updataP.tmpRoom = m.getNextRoom( p.getTmpRoom() , dirN ).getRoomUID();
+        if(updataP.tmpRoom.empty()){
+            goto _goto_mapErrorGo_;
+        }
+        p.update(updataP);
+        logs.debug("ok!");
+        mapRunner();
+        return;
+    } else if(readin == "quit") {
+        exit(0);
+    } else {
+_goto_mapErrorGo_:
+        if(lang=="zh") cout << "这是个无效的选项！请重试！\n";
+        else cout << "Invalid option! Please try again.\n";
+        cin.clear();
+        cin.sync();
+        goto _goto_mapDealOption;
+    }
+
+}
+
+void Game::showMap(){
+    vector< string > msg_ori;
+    string ele;
+    if(lang == "zh"){
+        ele = "您当前所在的房间为：";
+    } else {
+        ele = "You are at: ";
+    }
+    string tmpID = p.getTmpRoom();
+    msg_ori.push_back(ele + m.getRoomNameByID(tmpID));
+    for(int i = 0;i < 4;++i){
+        if(!m.haveNextRoom(tmpID,i)){
+            continue;
+        }
+        Room &nextRoom = m.getNextRoom(tmpID,i);
+        switch(i){
+            case 0: ele = " [North] : " + nextRoom.getRoomName();
+                break;
+            case 1: ele = "  [East] : " + nextRoom.getRoomName();
+                break;
+            case 2: ele = " [South] : " + nextRoom.getRoomName();
+                break;
+            case 3: ele = "  [West] : " + nextRoom.getRoomName();
+                break;
+        }
+        msg_ori.push_back(ele);
+    }
+    if(lang == "zh"){
+        ele = "使用[ go <方向> ]来移动。";
+    } else {
+        ele = "Use[ go <direction> ]to move.";
+    }
+    msg_ori.push_back(ele);
+    ele = "eg: go n";
+    msg_ori.push_back(ele);
+    ele = "eg: go north";
+    msg_ori.push_back(ele);
+    ele = "eg: go North";
+    msg_ori.push_back(ele);
+    vector<string> msg = generateIntoFrame(msg_ori);
+    printAll(msg);
 }

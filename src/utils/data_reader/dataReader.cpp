@@ -137,7 +137,7 @@ int QWQAnalyzer::analyze(){
 
         if(newVal){
             newVal = false;
-            cerr << "push [" << tag << "][" << key << "] = " << str << "\n";
+            // cerr << "push [" << tag << "][" << key << "] = " << str << "\n";
             dic[tag][key].push_back(str);
             continue;
         }
@@ -153,7 +153,7 @@ int QWQAnalyzer::analyze(){
             tmp.append(str);
             dic[tag][key].erase(it);
             dic[tag][key].push_back(tmp);
-            cerr << "edit [" << tag << "][" << key << "] = " << tmp << "\n";
+            //cerr << "edit [" << tag << "][" << key << "] = " << tmp << "\n";
         }
     }
     data.close();
